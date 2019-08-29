@@ -34,6 +34,8 @@ MCPDACClass mcp;
 
 #include <Wire.h>
 
+#include "USBStick.h"
+USBStick usb;
 
 void httpd_setup();
 void httpd_loop();
@@ -59,7 +61,7 @@ void setup()
 {
 
     Wire.begin(PB9,PB8);
-    ch423_test();
+    // ch423_test();
     mcp.begin(PC7, PD14);
     ad.selftest();
     pinMode(X1, INPUT_PULLUP);
@@ -209,6 +211,7 @@ void loop()
     ms2.holdingRegisterWrite(2, ya1);    //
     ms2.holdingRegisterWrite(3, ya2);    //
     ms2.poll();
+    usb.loop();
 }
 //DEFINE_USART_RS485(mons, 1, 0, 0);
 //DEFINE_USART_RS485(rs485, 3, 0, 0);
@@ -227,92 +230,3 @@ void loop()
 //        ModbusRTUServer.holdingRegisterWrite(0, 0);
 //    }
 //}
-void ch423_test()
-{
-    unsigned char i, j;
-    // Delay( 50 );
-    for (i = 0; i < 16; i++)
-        ch.CH423_buf_index(i, 0);     // 因为CH423复位时不清空显示内容，所以刚开电后必须人为清空，再开显示
-    ch.CH423_buf_write(CH423_SYSON1); // 开启显示
-    // 如果需要定期刷新显示内容，那么只要执行17个命令，包括16个数据加载命令，以及1个开启显示命令
-    ch.CH423_buf_write(CH423_DIG15 | BCD_decode_tab[15]); // 显示BCD码1
-    ch.CH423_buf_write(CH423_DIG14 | BCD_decode_tab[14]);
-    ch.CH423_buf_write(CH423_DIG13 | BCD_decode_tab[13]);
-    ch.CH423_buf_write(CH423_DIG12 | BCD_decode_tab[12]);
-    ch.CH423_buf_write(CH423_DIG11 | BCD_decode_tab[11]); // 显示BCD码1
-    ch.CH423_buf_write(CH423_DIG10 | BCD_decode_tab[10]);
-    ch.CH423_buf_write(CH423_DIG9 | BCD_decode_tab[9]);
-    ch.CH423_buf_write(CH423_DIG8 | BCD_decode_tab[8]);
-    ch.CH423_buf_write(CH423_DIG7 | BCD_decode_tab[7]);
-    ch.CH423_buf_write(CH423_DIG6 | BCD_decode_tab[6]);
-    ch.CH423_buf_write(CH423_DIG5 | BCD_decode_tab[5]); // 显示BCD码1
-    ch.CH423_buf_write(CH423_DIG4 | BCD_decode_tab[4]);
-    ch.CH423_buf_write(CH423_DIG3 | BCD_decode_tab[3]);
-    ch.CH423_buf_write(CH423_DIG2 | BCD_decode_tab[2]);
-    ch.CH423_buf_write(CH423_DIG1 | BCD_decode_tab[1]);
-    ch.CH423_buf_write(CH423_DIG0 | BCD_decode_tab[0]);
-    while (1)
-    { // 演示
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, 0xFF); // 全亮
-        // mDelayS( 1 );
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, 0x00); // 全灭
-        delay(500);
-        for (j = 0; j != 8; j++)
-        { // 依次扫描每段，演示
-            for (i = 0; i != 16; i++)
-                ch.CH423_buf_index(i, 1 << j);
-            delay(250);
-        }
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, 0xFF); // 全亮
-        delay(500);
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, BCD_decode_tab[i]); // 依次显示BCD译码0、1、2、3、4、5、6、7、8、9、A、b、c、d、E、F
-        delay(500);
-        for (i = 0; i != 8; i++) // 左循环
-        {
-            ch.LEFTCYC();
-            delay(250);
-        }
-        for (i = 0; i != 8; i++) // 右循环
-        {
-            ch.RIGHTCYC();
-            delay(250);
-        }
-        for (i = 0; i != 8; i++) // 左移
-        {
-            ch.LEFTMOV();
-            delay(250);
-        }
-        for (i = 0; i != 8; i++) // 右移
-        {
-            ch.RIGHTMOV();
-            delay(250);
-        }
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, BCD_decode_tab[i]); // 依次显示BCD译码0、1、2、3、4、5、6、7、8、9、a、b、c、d、E、F
-        delay(250);
-        for (i = 0; i != 16; i++) // 闪烁
-        {
-            ch.TWINKLE(i);
-            delay(100);
-        }
-        for (i = 0; i < 16; i++)
-            ch.CH423_buf_index(i, 0x00); // 全灭
-        delay(250);
-        for (i = 0; i != 16 * 8; i++) // 依次置段位
-        {
-            ch.CH423_set_bit(i);
-            delay(100);
-        }
-        delay(500);
-        for (i = 0; i != 16 * 8; i++) // 依次清段位
-        {
-            ch.CH423_clr_bit(i);
-            delay(100);
-        }
-        delay(500);
-    }
-}
