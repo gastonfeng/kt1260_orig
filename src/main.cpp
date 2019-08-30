@@ -39,7 +39,7 @@ MCPDACClass mcp;
 USBStick usb;
 
 #include <ShiftRegister74HC595.h>
-ShiftRegister74HC595 sr (3, PD5, PD3, PD2); 
+ShiftRegister74HC595 sr(3, PD5, PD3, PD2);
 
 void httpd_setup();
 void httpd_loop();
@@ -63,14 +63,16 @@ extern "C"
 
 void setup()
 {
-    sr.setAllLow(); 
-    pinMode(PC12,OUTPUT);
-    digitalWrite(PC12,LOW);
+        usb.begin();
+
+    sr.setAllLow();
+    pinMode(PC12, OUTPUT);
+    digitalWrite(PC12, LOW);
     Serial1.begin(9600);
     Serial1.println("start");
     Wire.setSCL(PB8);
     Wire.setSDA(PB9);
-    Wire.begin(MASTER_ADDRESS);
+    // Wire.begin(MASTER_ADDRESS);
     pcf8563.initClock();
     pcf8563.setDateTime(18, 1, 8, 0, 19, 22, 30, 30);
     // ch423_test();
@@ -81,7 +83,7 @@ void setup()
     mcp.shutdown(0, false);
     mcp.shutdown(1, false);
     // while (!ad.selftest())
-        ;
+    ;
     pinMode(X1, INPUT_PULLUP);
     pinMode(X2, INPUT_PULLUP);
     pinMode(X3, INPUT_PULLUP);
@@ -100,7 +102,7 @@ void setup()
     pinMode(X16, INPUT_PULLUP);
     pinMode(XA4, INPUT_ANALOG);
     pinMode(XA7, INPUT_ANALOG);
-    atemp_init=analogRead(ATEMP);
+    atemp_init = analogRead(ATEMP);
     // srand(1111111);
     core_debug("rand:%d\n", GetRand());
     pinMode(PA5, OUTPUT);
@@ -128,7 +130,6 @@ void setup()
     ms2.configureHoldingRegisters(0x00, 4);
     ms2.configureDiscreteInputs(0x00, 16);
     ms2.configureCoils(0x00, 24);
-
 }
 void rt_application_init()
 {
@@ -139,8 +140,8 @@ int last;
 void loop()
 {
     uptime = millis() / 60000;
-    avref=analogRead(AVREF);
-    atemp=analogRead(ATEMP)-atemp_init;
+    avref = analogRead(AVREF);
+    atemp = analogRead(ATEMP) - atemp_init;
     // Serial1.print(pcf8563.formatDate());
     // Serial1.print(" ");
     // Serial1.println(pcf8563.formatTime());
@@ -211,30 +212,30 @@ void loop()
     }
     // config_run__(10);
     httpd_loop();
-    sr.setNoUpdate(0,yy1);
-    sr.setNoUpdate(1,yy2);
-    sr.setNoUpdate(2,yy3);
-    sr.setNoUpdate(3,yy4);
-    sr.setNoUpdate(4,yy5);
-    sr.setNoUpdate(5,yy6);
-    sr.setNoUpdate(6,yy7);
-    sr.setNoUpdate(7,yy8);
-    sr.setNoUpdate(8,yy9);
-    sr.setNoUpdate(9,yy10);
-    sr.setNoUpdate(10,yy11);
-    sr.setNoUpdate(11,yy12);
-    sr.setNoUpdate(12,yy13);
-    sr.setNoUpdate(13,yy14);
-    sr.setNoUpdate(14,yy15);
-    sr.setNoUpdate(15,yy16);
-    sr.setNoUpdate(16,yy17);
-    sr.setNoUpdate(17,yy18);
-    sr.setNoUpdate(18,yy19);
-    sr.setNoUpdate(19,yy20);
-    sr.setNoUpdate(20,yy21);
-    sr.setNoUpdate(21,yy22);
-    sr.setNoUpdate(22,yy23);
-    sr.setNoUpdate(23,yy24);
+    sr.setNoUpdate(0, yy1);
+    sr.setNoUpdate(1, yy2);
+    sr.setNoUpdate(2, yy3);
+    sr.setNoUpdate(3, yy4);
+    sr.setNoUpdate(4, yy5);
+    sr.setNoUpdate(5, yy6);
+    sr.setNoUpdate(6, yy7);
+    sr.setNoUpdate(7, yy8);
+    sr.setNoUpdate(8, yy9);
+    sr.setNoUpdate(9, yy10);
+    sr.setNoUpdate(10, yy11);
+    sr.setNoUpdate(11, yy12);
+    sr.setNoUpdate(12, yy13);
+    sr.setNoUpdate(13, yy14);
+    sr.setNoUpdate(14, yy15);
+    sr.setNoUpdate(15, yy16);
+    sr.setNoUpdate(16, yy17);
+    sr.setNoUpdate(17, yy18);
+    sr.setNoUpdate(18, yy19);
+    sr.setNoUpdate(19, yy20);
+    sr.setNoUpdate(20, yy21);
+    sr.setNoUpdate(21, yy22);
+    sr.setNoUpdate(22, yy23);
+    sr.setNoUpdate(23, yy24);
     sr.updateRegisters();
     mcp.setVoltage(0, ya1);
     mcp.setVoltage(1, ya2);
