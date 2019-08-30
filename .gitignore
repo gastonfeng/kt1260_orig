@@ -34,3 +34,4 @@
 /.vscode/
 link.map
 /.idea/
+fsdata.c
