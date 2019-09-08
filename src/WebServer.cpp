@@ -33,12 +33,14 @@ IPAddress ip(192, 168, 31, 156);
 // with the IP address and port you want to use
 // (port 80 is default for HTTP):
 EthernetServer server(80);
+void web_init();
 
 void httpd_setup()
 {
   // start the Ethernet connection and the server:
   Ethernet.begin(ip);
   httpd_init();
+  web_init();
 }
 
 void httpd_loop()

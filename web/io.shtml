@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>KT1260可编程控制器</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/pure.css">
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/ui.js"></script>
+</head>
+
+<body>
+    <div id="layout">
+        <div id="main" class="flex-fill flex-vbox" style="max-height:100%">
+            <h1>DI</h1>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>X00</td>
+                        <td>X01</td>
+                        <td>X02</td>
+                        <td>X03</td>
+                        <td>X04</td>
+                        <td>X05</td>
+                        <td>X06</td>
+                        <td>X07</td>
+                        <td>X10</td>
+                        <td>X11</td>
+                        <td>X12</td>
+                        <td>X13</td>
+                        <td>X14</td>
+                        <td>X15</td>
+                        <td>X16</td>
+                        <td>X17</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--#X01-->
+                        </td>
+                        <td>
+                            <!--#X02-->
+                        </td>
+                        <td>X02</td>
+                        <td>X03</td>
+                        <td>X04</td>
+                        <td>X05</td>
+                        <td>X06</td>
+                        <td>X07</td>
+                        <td>X10</td>
+                        <td>X11</td>
+                        <td>X12</td>
+                        <td>X13</td>
+                        <td>X14</td>
+                        <td>X15</td>
+                        <td>X16</td>
+                        <td>X17</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1>DO</h1>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Y00</td>
+                        <td>Y01</td>
+                        <td>Y02</td>
+                        <td>Y03</td>
+                        <td>Y04</td>
+                        <td>Y05</td>
+                        <td>Y06</td>
+                        <td>Y07</td>
+                        <td>Y10</td>
+                        <td>Y11</td>
+                        <td>Y12</td>
+                        <td>Y13</td>
+                        <td>Y14</td>
+                        <td>Y15</td>
+                        <td>Y16</td>
+                        <td>Y17</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!--#Y00-->
+                            <form method="GET" action="yout.cgi"><button name="Y00">反相</button></form>
+                        </td>
+                        <td>X01</td>
+                        <td>X02</td>
+                        <td>X03</td>
+                        <td>X04</td>
+                        <td>X05</td>
+                        <td>X06</td>
+                        <td>X07</td>
+                        <td>X10</td>
+                        <td>X11</td>
+                        <td>X12</td>
+                        <td>X13</td>
+                        <td>X14</td>
+                        <td>X15</td>
+                        <td>X16</td>
+                        <td>X17</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    onLoad(function () {})
+</script>
+
+</html>

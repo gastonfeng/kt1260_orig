@@ -3,7 +3,7 @@ import os
 Import("env", "projenv")
 
 # access to global construction environment
-# print(env)
+# print env
 
 # access to project construction environment
 # print projenv

@@ -11,6 +11,6 @@ __DECLARE_ENUMERATED_TYPE(LOGLEVEL,
   LOGLEVEL__INFO,
   LOGLEVEL__DEBUG
 )
-// #include "LOGGER.h"
+#include "LOGGER.h"
 #include "program0.h"
 #endif //__POUS_H
