@@ -14,7 +14,7 @@ Import("env", "projenv")
 
 BUILD_NUMBER = os.environ.get('BUILD_NUMBER') or "0"
 projenv.Append(CPPDEFINES=[('BUILD_NUMBER', BUILD_NUMBER)])
-
+os.system("/kvpac/tools/makefsdata.exe web") 
 
 # env.Append(ldscript='stm32f103ve.ld')
 def before_upload(source, target, env):
