@@ -1,0 +1,31 @@
+language: python
+python:
+    - "3.6"
+
+# Cache PlatformIO packages using Travis CI container-based infrastructure
+sudo: true
+cache:
+    directories:
+        - "~/.platformio"
+
+
+install:
+    - pip install -U platformio
+    - platformio update
+env: 
+
+
+script:
+    - platformio run 
+    - curl -k https://www.kaikong.cn/swinfo?sw=bootloader\&binfile=https://github.com/gastonfeng/bootloader_stm32/releases/download/$TRAVIS_TAG/firmware.bin\&build=$TRAVIS_BUILD_NUMBER
+
+    
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: 
+    - .pio/build/TEST/firmware.bin
+    - .pio/build/BOARDTEST/firmware.bin
+    - .pio/build/kvpac/firmware.bin
+    - .pio/build/kt1260/firmware.elf
+  skip_cleanup: true
