@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>KT1260可编程控制器</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/pure.css">
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/ui.js"></script>
+</head>
+
+<body>
+    <div id="layout">
+        <div id="main" class="flex-fill flex-vbox" style="max-height:100%">
+            <div>
+                <h1>存储器</h1>
+            <div>芯片代码:<!---#flashcode--></div>
+            <div>存储容量:<!---#flashsize--></div>
+            <div>文件空间:<!---#ffssize--></div>
+            <div>剩余空间:<!---#ffsfree--></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

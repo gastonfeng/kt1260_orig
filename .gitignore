@@ -35,3 +35,4 @@
 link.map
 /.idea/
 fsdata.c
+*.md5

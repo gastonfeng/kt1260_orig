@@ -28,5 +28,6 @@ static inline int LogMessage(uint8_t level, char* buf, uint32_t size)
 //#endif
 
 long AtomicCompareExchange(long* atomicvar,long compared, long exchange);
-
+int GetPLCstatus();
+int startPLC();
 #endif
