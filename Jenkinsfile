@@ -15,21 +15,24 @@ pipeline {
             steps {
                 echo "构建中..."
                 sh 'docker version'
+                pip install -U platformio
+                platformio update
+                platformio run
                 // 请在这里放置您项目代码的单元测试调用过程，例如:
                 // sh 'mvn package' // mvn 示例
                 // sh 'make' // make 示例
                 echo "构建完成."
               
                 // 演示怎样产生构建物
-                script{
-                    def exists = fileExists 'README.md'
-                    if (!exists) {
-                        writeFile(file: 'README.md', text: 'Helloworld')
-                    }
-                }
-                archiveArtifacts artifacts: 'README.md', fingerprint: true
+                // script{
+                //     def exists = fileExists 'README.md'
+                //     if (!exists) {
+                //         writeFile(file: 'README.md', text: 'Helloworld')
+                //     }
+                // }
+                // archiveArtifacts artifacts: 'README.md', fingerprint: true
               
-                // archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true // 收集构建产物
+                archiveArtifacts artifacts: '.pio/build/kvpac/firmware.bin,.pio/build/TEST/firmware.bin,.pio/build/BOARDTEST/firmware.bin', fingerprint: true // 收集构建产物
             }
         }
 
